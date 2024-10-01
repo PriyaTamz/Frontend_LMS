@@ -1,8 +1,34 @@
-# React + Vite
+# Library Management System (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the Library Management System (LMS), designed to provide a user-friendly interface for managing book inventory, borrowing, returns, user accounts, and reviews.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Book Management**
+  - View and search for books by title, author, genre, or ISBN.
+  - Reserve books that are currently checked out.
+  
+- **Borrowing and Returns**
+  - Borrow books with tracking of due dates.
+  - Return borrowed books and manage late fees.
+
+- **User Accounts**
+  - User registration and login functionality.
+  - Profile management with viewing borrowing history and reserved books.
+
+- **User Reviews**
+  - Submit and view reviews for borrowed books.
+  - Rate books and provide feedback.
+
+## Technologies Used
+
+- **Frontend Framework**: React
+- **Styling**: CSS
+- **State Management**: Context API/Redux
+- **Routing**: React Router
+- **HTTP Client**: Axios for API calls
+
+## Install the required dependencies
+
+npm install axios react-redux @reduxjs/toolkit react-router-dom
+
