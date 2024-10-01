@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const baseurl = process.env.REACT_APP_BASE_URL;
-
-console.log(baseurl);
+const baseurl = 'https://library-management-system-backend-1.onrender.com';
 
 const instance = axios.create({
     baseURL: baseurl,
