@@ -1,0 +1,47 @@
+.dashboard-nav {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    gap: 50px;
+    padding: 0px;
+    align-items: center;
+    align-content: center;
+    margin: 0px;
+}
+
+.dashboard-nav li {
+    display: inline;
+    background-color:  #4d6883;
+}
+
+.dashboard-nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.dashboard-nav .active {
+    font-weight: bold;
+    color: #333;
+}
+
+.buttonnav{
+   background-color: #4d6883;
+   color:  #333;
+   font-weight: bold;
+   font-size: 18px;
+   padding: 0px;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; 
+    margin-right: 20px;
+    padding: 20px 20px;
+    background-color: wheat;
+    border-radius: 50px;
+    display: inline-block;
+}

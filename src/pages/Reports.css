@@ -1,0 +1,54 @@
+
+.reports-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #555;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.loading-message {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.back-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.back-button:hover {
+    background-color: #0056b3; 
+}
