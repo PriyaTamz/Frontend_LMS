@@ -121,7 +121,6 @@ const AdminDashboard = () => {
     return (
         <div className="admin-dashboard">
             <Outlet /> 
-            <h1 className='name'>Welcome, {}!</h1>
             <h2 className='allbooks'>All Books</h2>
             <form onSubmit={handleAddBook}>
                 <h3 className='allbooks'>{isEditing ? 'Edit Book' : 'Add New Book'}</h3>

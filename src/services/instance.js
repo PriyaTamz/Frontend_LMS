@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseurl = 'https://library-management-system-backend-u1bd.onrender.com';
+const baseurl = 'https://backend-lms-ftog.onrender.com';
 
 const instance = axios.create({
     baseURL: baseurl,
