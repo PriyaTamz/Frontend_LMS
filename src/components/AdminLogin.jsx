@@ -26,9 +26,9 @@ const AdminLogin = () => {
       .then(response => {
         alert(response.data.message);
   
-        if (response.data.token) {
+        /*if (response.data.token) {
           localStorage.setItem('token', response.data.token);
-        }
+        }*/
 
         if (response.data.adminId) {
           console.log(response.data);
