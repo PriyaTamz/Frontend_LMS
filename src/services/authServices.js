@@ -35,12 +35,12 @@ const authServices = {
     },
     userlogin: async (data) => {
         const response = await instance.post('/user/login', data);
-        console.log("user auth :", response.data.token); 
+        console.log("user auth :", response.data.token);
         if (response.data.token) {
             localStorage.setItem('token', response.data.token);
         }
-        if (response.data.userId) { 
-            localStorage.setItem('userId', response.data.userId); 
+        if (response.data.userId) {
+            localStorage.setItem('userId', response.data.userId);
         }
         return response;
     },
@@ -48,27 +48,41 @@ const authServices = {
         return await instance.post('/admin/register', data);
     },
     adminlogin: async (data) => {
-        const response = await instance.post('/admin/login', data); 
-        console.log("admin auth :", response.data.token); 
+        const response = await instance.post('/admin/login', data);
+        console.log("admin auth :", response.data.token);
         if (response.data.token) {
 
             document.cookie = `token=${response.data.token}; path=/; SameSite=Lax; secure;`;
         }
-        if (response.data.adminId) { 
-            localStorage.setItem('adminId', response.data.adminId); 
+        if (response.data.adminId) {
+            localStorage.setItem('adminId', response.data.adminId);
         }
         return response;
+    },
+    getAdminProfile: async () => {
+        // Retrieve the token from cookies
+        const token = document.cookie.split('; ').find(row => row.startsWith('token='));
+        const tokenValue = token ? token.split('=')[1] : null;
+
+        if (!tokenValue) {
+            throw new Error("No token found");
+        }
+        return await instance.get('/admin/profile', {
+            headers: {
+                Authorization: `Bearer ${tokenValue}`
+            }
+        });
     },
     me: async () => {
         // Retrieve the token from cookies
         const token = document.cookie.split('; ').find(row => row.startsWith('token='));
         const tokenValue = token ? token.split('=')[1] : null;
-    
+
         // Check if the token is found
         if (!tokenValue) {
             throw new Error("No token found");
         }
-    
+
         // Make the request with the token
         return await instance.get('/admin/me', {
             headers: {
@@ -90,17 +104,6 @@ const authServices = {
             throw new Error("No token found");
         }
         return await instance.get('/user/profile', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-    },
-    getAdminProfile: async () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            throw new Error("No token found");
-        }
-        return await instance.get('/admin/profile', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -129,9 +132,9 @@ const authServices = {
         });
     },
     reserveBook: async (bookId) => {
-        const userId = localStorage.getItem('userId'); 
-        const token = localStorage.getItem('token'); 
-        return await instance.post(`/books/reserve/${bookId}`, { userId }, 
+        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
+        return await instance.post(`/books/reserve/${bookId}`, { userId },
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -160,10 +163,10 @@ const authServices = {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         });
-    },  
+    },
     getReviews: async (bookId) => {
         return await instance.get(`/books/${bookId}/reviews`);
-    },  
+    },
     deleteReview: async (bookId, reviewId) => {
         return instance.delete(`/admin/delete-review/${bookId}/${reviewId}`, {
             headers: {
@@ -175,7 +178,7 @@ const authServices = {
         return await instance.post('user/forgot-password', data);
     },
     enterOtp: async (otp) => {
-        return await instance.post('user/verify-otp', {otp});
+        return await instance.post('user/verify-otp', { otp });
     },
     resetpassword: async (data) => {
         return await instance.post('user/reset-password', data);
