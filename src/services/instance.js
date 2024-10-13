@@ -1,10 +1,11 @@
 import axios from "axios";
 
 const baseurl = 'https://backend-lms-ftog.onrender.com';
+//const baseurl = 'http://localhost:3001';
 
 const instance = axios.create({
     baseURL: baseurl,
-    timeout: 20000,
+    timeout: 30000,
     headers: {
         'Content-Type': 'application/json',
     },

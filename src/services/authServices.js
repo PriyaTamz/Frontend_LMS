@@ -195,7 +195,18 @@ const authServices = {
             }
         });
     },
-
+    getUserNotifications: async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found");
+        }
+        const response = await instance.get(`/notifications`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    },    
 };
 
 export default authServices;
