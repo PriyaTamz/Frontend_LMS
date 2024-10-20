@@ -38,6 +38,12 @@ form {
     width: 15%;
 }
 
+.genre {
+    width: 15%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 form input {
     padding: 10px;
     margin: 10px 0;

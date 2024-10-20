@@ -9,8 +9,8 @@ const AdminDashboard = () => {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [currentPage, setCurrentPage] = useState(1); 
-    const rowsPerPage = 7; 
+    const [currentPage, setCurrentPage] = useState(1);
+    const rowsPerPage = 7;
     const [newBook, setNewBook] = useState({
         title: '',
         author: '',
@@ -23,16 +23,16 @@ const AdminDashboard = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editBookId, setEditBookId] = useState(null);
 
-    
+
     const [announcementMessage, setAnnouncementMessage] = useState('');
     const [announcementError, setAnnouncementError] = useState('');
     const [announcementSuccess, setAnnouncementSuccess] = useState('');
 
-    const [filteredBooks, setFilteredBooks] = useState([]); 
+    const [filteredBooks, setFilteredBooks] = useState([]);
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchOption, setSearchOption] = useState('title'); 
-    const [isSearching, setIsSearching] = useState(false); 
+    const [searchOption, setSearchOption] = useState('title');
+    const [isSearching, setIsSearching] = useState(false);
 
     const fetchBooks = async () => {
         try {
@@ -55,7 +55,7 @@ const AdminDashboard = () => {
         fetchBooks();
     }, []);
 
-    // Pagination logic
+
     const totalPages = Math.ceil(filteredBooks.length / rowsPerPage);
     const indexOfLastBook = currentPage * rowsPerPage;
     const indexOfFirstBook = indexOfLastBook - rowsPerPage;
@@ -85,16 +85,16 @@ const AdminDashboard = () => {
         }
 
         setFilteredBooks(filtered);
-        setSearchTerm('');  
+        setSearchTerm('');
         setCurrentPage(1);
         setIsSearching(true);
     };
 
     const handleBackButtonClick = () => {
-        setIsSearching(false); 
-        setFilteredBooks(books); 
+        setIsSearching(false);
+        setFilteredBooks(books);
         setSearchTerm('');
-        setCurrentPage(1); 
+        setCurrentPage(1);
     };
 
     const handleInputChange = (e) => {
@@ -116,7 +116,7 @@ const AdminDashboard = () => {
         try {
             if (isEditing) {
                 const response = await authServices.updateBook(editBookId, newBook);
-               
+
                 setBooks((prev) => prev.map(book => (book._id === editBookId ? response.data : book)));
                 setFilteredBooks((prev) => prev.map(book => (book._id === editBookId ? response.data : book)));
                 setIsEditing(false);
@@ -124,7 +124,7 @@ const AdminDashboard = () => {
                 alert('Book updated successfully');
             } else {
                 const response = await authServices.addBook(newBook);
-               
+
                 setBooks((prev) => [...prev, response.data]);
                 setFilteredBooks((prev) => [...prev, response.data]);
                 alert('Book added successfully');
@@ -138,8 +138,8 @@ const AdminDashboard = () => {
                 publication_year: '',
                 isAvailable: true,
             });
-            fetchBooks(); 
-            setCurrentPage(totalPages); 
+            fetchBooks();
+            setCurrentPage(totalPages);
             setIsEditing(false);
             setEditBookId(null);
         } catch (error) {
@@ -177,7 +177,7 @@ const AdminDashboard = () => {
     };
 
     const handleViewBook = (bookId) => {
-        navigate(`/books/${bookId}`);  
+        navigate(`/books/${bookId}`);
     };
 
     const handleAnnouncementSubmit = async (e) => {
@@ -193,7 +193,7 @@ const AdminDashboard = () => {
         try {
             await authServices.sendAnnouncement({ message: announcementMessage });
             setAnnouncementSuccess('Announcement sent successfully!');
-            setAnnouncementMessage(''); 
+            setAnnouncementMessage('');
         } catch (error) {
             console.error('Error sending announcement:', error);
             setAnnouncementError('Failed to send announcement');
@@ -206,7 +206,7 @@ const AdminDashboard = () => {
     return (
         <div className="admin-dashboard">
             <Outlet />
-          
+
             <h3 className="allbooks">Send Announcement</h3>
             <form onSubmit={handleAnnouncementSubmit}>
                 <textarea
@@ -247,14 +247,18 @@ const AdminDashboard = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <input
-                    type="text"
+                <select
                     name="genre"
-                    placeholder="Genre"
                     value={newBook.genre}
+                    className='genre'
                     onChange={handleInputChange}
                     required
-                />
+                >
+                    <option value="">Select Genre</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-Fiction">Non-Fiction</option>
+                    <option value="Education">Education</option>
+                </select>
                 <input
                     type="text"
                     name="subcategory"
@@ -289,7 +293,7 @@ const AdminDashboard = () => {
                 />
                 <button onClick={handleSearch} className="search-btn">Search</button>
 
-                
+
                 {isSearching && (
                     <button onClick={handleBackButtonClick} className="btn btn-link">Back to Dashboard</button>
                 )}
@@ -317,7 +321,7 @@ const AdminDashboard = () => {
                 </tbody>
             </table>
 
-           
+
             <div className="pagination">
                 {Array.from({ length: totalPages }, (_, i) => (
                     <button
