@@ -1,36 +1,52 @@
-.dashboard-nav {
+
+.dashboard-container {
     display: flex;
-    list-style: none;
-    justify-content: space-evenly;
-    gap: 50px;
-    padding: 0px;
-    align-items: center;
-    align-content: center;
-    margin: 0px;
+    justify-content: space-between; 
+    align-items: center; 
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 30px;
+    background-color: #4a4a4a;
 }
 
-.dashboard-nav li {
-    display: inline;
-    background-color:  #4d6883;
+.report {
+    margin-bottom: 0;
 }
 
-.dashboard-nav a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #333;
-    margin-left: 40px;
-    margin-right: 40px;
+.logout {
+    margin-bottom: 0;
 }
 
-.dashboard-nav .active {
-    font-weight: bold;
-    color: #333;
+.buttonnav {
+    border-radius: 3px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-.buttonnav{
-   background-color: #4d6883;
-   color:  #333;
-   font-weight: bold;
-   font-size: 18px;
-   padding: 0px;
+.buttonnav:hover {
+    background-color: #0056b3;
+}
+
+.dashboard-container nav .active, 
+.dashboard-container nav a {
+    text-decoration: none; 
+    color:aquamarine;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.dashboard-container nav a:hover {
+    color: #000000;
+}
+
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
 }

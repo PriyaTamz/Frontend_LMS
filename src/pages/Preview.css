@@ -1,0 +1,47 @@
+.preview-container {
+    padding: 20px;
+}
+
+.book-preview {
+    display: flex;
+    gap: 20px;
+}
+
+.preview-image {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.book-info {
+    flex: 1;
+}
+
+.book-reviews {
+    margin-top: 20px;
+}
+
+.book-reviews ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.book-reviews li {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.back-button {
+    margin: 20px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

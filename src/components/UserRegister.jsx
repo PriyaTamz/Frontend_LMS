@@ -36,6 +36,7 @@ const Register = () => {
 
   return (
     <div className="container">
+       <button onClick={() => navigate(-1)} className="buttin-nav">Back</button> {/* Back button */}
       <h1 className='header'>User Register</h1>
       <form onSubmit={handleRegister}>
         <div>

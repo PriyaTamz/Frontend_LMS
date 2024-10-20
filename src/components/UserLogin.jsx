@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { selectEmail, selectPassword, setEmail, setPassword } from '../features/authentication/UserLoginSlice';
 import authServices from '../services/authServices';
-import './Login.css'; 
+import './Login.css';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const Login = () => {
           localStorage.setItem('token', response.data.token);
         }
 
-        if (response.data.userId) { 
+        if (response.data.userId) {
           console.log(response.data);
           localStorage.setItem('userId', response.data.userId);
         }
@@ -49,6 +49,7 @@ const Login = () => {
 
   return (
     <div className="container">
+      <button onClick={() => navigate(-1)} className="buttin-nav">Back</button> {/* Back button */}
       <h1 className='header'>User Login</h1>
       <form onSubmit={handleLogin}>
         <div>

@@ -12,12 +12,17 @@ import AdminRegister from './components/AdminRegister';
 import AdminDashboard from './pages/AdminDashboard';
 import SubmitReview from './pages/SubmitReview';
 import Reviews from './pages/Reviews';
-import BookReviews from './pages/BookReviews';
 import ForgotPassword from './components/ForgotPassword';
 import EnterOtp from "./components/EnterOtp";
 import ResetPassword from "./components/ResetPassword";
-import MyBooks from './pages/MyBooks';
 import Reports from './pages/Reports';
+import MyProfile from './pages/MyProfile';
+import Preview from './pages/Preview';
+import AdminViewBooks from './pages/AdminViewBooks';
+import FictionBooks from './pages/FictionBooks';
+import NonFictionBooks from './pages/NonFictionBooks';
+import EducationBooks from './pages/EducationBooks';
+import ViewBookUser from './pages/ViewBookUser';
 
 const router = createBrowserRouter([
   {
@@ -33,22 +38,42 @@ const router = createBrowserRouter([
         element: <SearchResults />
       },
       {
-        path: 'user-register',
-        element: <UserRegister />
+        path: 'fiction-books',
+        element: <FictionBooks />,
       },
       {
-        path: 'user-login',
-        element: <UserLogin />
+        path: 'non-fiction-books',
+        element: <NonFictionBooks />,
       },
       {
-        path: 'admin-register',
-        element: <AdminRegister />
-      },
-      {
-        path: 'admin-login',
-        element: <AdminLogin />
+        path: 'education-books',
+        element: <EducationBooks />,
       },
     ]
+  },
+  {
+    path: 'user-register',
+    element: <UserRegister />
+  },
+  {
+    path: 'user-login',
+    element: <UserLogin />
+  },
+  {
+    path: 'admin-register',
+    element: <AdminRegister />
+  },
+  {
+    path: 'admin-login',
+    element: <AdminLogin />
+  },
+  {
+    path: '/books/details/:bookId',
+    element: <Preview />,
+  },
+  {
+    path: '/books/:bookId',
+    element: <AdminViewBooks />,
   },
   {
     path: '/books/:bookId/reviews',
@@ -67,8 +92,8 @@ const router = createBrowserRouter([
     element: <ResetPassword />
   },
   {
-    path: 'dashboard',
-    element: <UserDashboard />, 
+    path: '/dashboard',
+    element: <UserDashboard />,
     children: [
       {
         path: '',
@@ -77,8 +102,12 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: 'my-books',
-    element: <MyBooks />,
+    path: "/books/auth/details/:bookId",
+    element: <ViewBookUser />,
+  },
+  {
+    path: 'my-profile',
+    element: <MyProfile />,
   },
   {
     path: 'submit-review/:bookId',
@@ -90,17 +119,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <AdminDashboardNav />, 
+        element: <AdminDashboardNav />,
       },
       {
         path: 'reports',
         element: <Reports />,
       },
     ]
-  },
-  {
-    path: '/reviews/:bookId',
-    element: <BookReviews />,
   },
 ]);
 

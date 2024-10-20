@@ -1,0 +1,11 @@
+.rating {
+    font-size: 24px;
+}
+
+.fa-star {
+    color: #d3d3d3;
+}
+
+.fa-star.checked {
+    color: #ffcc00;
+}

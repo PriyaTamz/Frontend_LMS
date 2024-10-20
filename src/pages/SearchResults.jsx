@@ -1,17 +1,24 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Rating from './Rating';
 
 const SearchResults = () => {
   const location = useLocation();
   const { books = [], searchTerm = '' } = location.state || {};
+  const navigate = useNavigate();
 
-  const filteredBooks = books.filter((book) => 
+
+  const filteredBooks = books.filter((book) =>
     searchTerm ? book.title.toLowerCase().includes(searchTerm.toLowerCase()) : true
   );
 
   if (filteredBooks.length === 0) {
     return <div className="alert alert-warning">No books found matching your search criteria.</div>;
   }
+
+  const handlePreview = (bookId) => {
+    navigate(`/books/details/${bookId}`);
+  };
 
   return (
     <div>
@@ -26,14 +33,15 @@ const SearchResults = () => {
             />
             <div className="card-body">
               <h5 className="card-title">{book.title || 'Untitled'}</h5>
-              <p className="card-text">Author: {book.author}</p>
-              <p className="card-text">Genre: {book.genre}</p>
+             
+              <Rating rating={book.rating || 0} />
               <button
                 type="button"
-                className="btn btn-link"
+                className="btn btn-success"
+                onClick={() => handlePreview(book._id)}
                 style={{ marginTop: '10px' }}
               >
-                View Details
+                Want to Read
               </button>
             </div>
           </div>

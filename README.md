@@ -20,6 +20,10 @@ This is the frontend application for the Library Management System (LMS), design
   - Submit and view reviews for borrowed books.
   - Rate books and provide feedback.
 
+- **Notification System**
+  - Receive notifications for events such as successful borrowing, reservations, and overdue reminders.
+  - View and manage notifications within the user account.
+
 ## Technologies Used
 
 - **Frontend Framework**: React

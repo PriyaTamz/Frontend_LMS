@@ -1,102 +1,71 @@
-.container {
-  margin: 50px auto; 
-  background-color:  #34495e;
-  color: wheat;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  height: 600px; 
-  width: 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-}
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
+.container {
+  max-width: 400px; /* Limit the width of the container */
+  margin: 50px auto; /* Center the container horizontally */
+  padding: 20px; /* Add some padding */
+  background-color: #f9f9f9; /* Light background color */
 }
 
 .header {
-  text-align: center;
-  margin-bottom: 60px;
-  font-weight: bold;
+  text-align: center; /* Center the header text */
+  color: #c7c7c7; /* Darker text color */
+  margin-bottom: 20px; /* Space below the header */
 }
 
+/* Button styles */
+.buttin-nav {
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding inside the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-bottom: 20px; /* Space below the button */
+}
+
+.buttin-nav:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Form label styles */
 label {
-  font-size: 20px;
-  color: #2c3e50;
-  margin-bottom: 5px;
-  text-align: left;
-  display: block;
-  min-width: 200px;
-  font-weight: bold;
-  font-style:oblique;
+  display: block; /* Labels on their own line */
+  margin-bottom: 5px; /* Space below each label */
+  color: #555; /* Medium gray color */
 }
 
-input[type="text"], input[type="password"] {
-  width: auto; 
-  min-width: 250px; 
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  outline: none;
+/* Input field styles */
+input {
+  width: 100%; /* Full width */
+  padding: 10px; /* Padding inside input fields */
+  margin-bottom: 15px; /* Space below each input field */
+  border: 1px solid #ccc; /* Border around input */
+  border-radius: 5px; /* Rounded corners */
 }
 
-input[type="text"]:focus, input[type="password"]:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center; 
-}
-
-button {
-  padding: 10px;
-  background-color: #2c3e50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  min-width: 150px;
-  max-width: 250px;
-  width: auto;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
+/* Link styles */
 .forgot-password-link {
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: wheat;
-  text-decoration: none;
+  display: block; /* Link on its own line */
+  margin-bottom: 20px; /* Space below the link */
+  color: #007bff; /* Link color */
+  text-align: center; /* Center the link */
 }
 
 .forgot-password-link:hover {
-  text-decoration: underline;
+  text-decoration: underline; /* Underline on hover */
 }
 
-p {
-  font-size: 0.9rem;
+/* Button styles */
+button[type='submit'] {
+  background-color: #28a745; /* Green background for the submit button */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding inside the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  width: 100%; /* Full width */
 }
 
-p a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-p a:hover {
-  text-decoration: underline;
+button[type='submit']:hover {
+  background-color: #218838; /* Darker green on hover */
 }

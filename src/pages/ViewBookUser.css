@@ -1,0 +1,109 @@
+.book-details {
+    margin: 20px 20px 20px 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-bottom: 80px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.download-pdf {
+    margin: 20px 20px 20px 45px;
+    background-color: #28a745; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 15px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.2s; 
+}
+
+.download-pdf:hover {
+    background-color: #218838; 
+    transform: scale(1.05); 
+}
+
+.download-pdf:focus {
+    outline: none; 
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+
+
+.preview-image {
+    margin-top: 30px;
+    width: 250px;
+    height: 300px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.para {
+    font-size: medium;
+    line-height: 1.6;
+    color: #555;
+    font-style: italic;
+    margin-top: 30px;
+}
+
+.review {
+    margin-top: 15px;
+    background-color: #f8f9fa;
+    border-left: 5px solid #007bff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.book-info {
+    font-weight: bold;
+    font-size: larger;
+    color: #444;
+    margin-top: 50px;
+    border-bottom: 2px solid #bbdcff; 
+    border-width: 5px;
+    border-radius: 10px;
+    padding-bottom: 10px; 
+}
+
+.rev-title {
+    font-weight: bold;
+    color: #444;
+    font-size: larger;
+    margin-top: 50px;
+    border-bottom: 2px solid #bbdcff; 
+    border-width: 5px;
+    border-radius: 10px;
+    padding-bottom: 10px; 
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    border-bottom: 2px solid #bbdcff; 
+    border-width: 5px;
+    border-radius: 10px;
+}
+.filled-star {
+    color: gold;
+}
+
+.empty-star {
+    color: lightgray;
+}

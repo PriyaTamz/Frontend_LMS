@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import authServices from '../services/authServices';
 import { Outlet } from 'react-router-dom';
-import './AdminDashboardNav.css'; 
+import './AdminDashboardNav.css';
 
 const AdminDashboardNav = () => {
     const navigate = useNavigate();
-    const [adminName, setAdminName] = useState(''); 
+    const [adminName, setAdminName] = useState('');
     const isLoggedIn = !!localStorage.getItem('token');
 
- 
+
     useEffect(() => {
         if (!isLoggedIn) {
-            navigate('/admin-login'); 
+            navigate('/admin-login');
         } else {
-            authServices.getAdminProfile() 
+            authServices.getAdminProfile()
                 .then(response => {
-                    setAdminName(response.data.admin.name); 
+                    setAdminName(response.data.admin.name);
                     console.log("Fetched Admin Name:", response.data.admin.name);
                 })
                 .catch(error => {
@@ -28,30 +28,26 @@ const AdminDashboardNav = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-        navigate('/admin-login', { replace: true }); 
+        navigate('/', { replace: true });
     };
 
     return (
-        <nav>
-            <Outlet /> 
-            <ul className="dashboard-nav">
-                <li>
-                    <NavLink to="/admin-dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
-                        Dashboard
-                    </NavLink>
-                </li>
-                <li>
+        <div className="dashboard-container">
+            <nav>
+                <div className='report'>
                     <NavLink to="/admin-dashboard/reports" className={({ isActive }) => (isActive ? 'active' : '')}>
-                        Reports
+                        User Report
                     </NavLink>
-                </li>
-                {isLoggedIn && (
-                    <li>
-                        <button className='buttonnav' onClick={handleLogout}>Logout</button>
-                    </li>
-                )}
-            </ul>
-        </nav>
+                </div>
+
+                <div className='logout'>
+                    {isLoggedIn && (
+                        <button className="buttonnav" onClick={handleLogout}>Logout</button>
+                    )}
+                </div>
+            </nav>
+            <Outlet />
+        </div>
     );
 };
 

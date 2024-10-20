@@ -1,0 +1,87 @@
+.my-profile {
+    max-width: 1600px; 
+    margin: 50px auto; 
+    padding: 20px;
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section {
+    margin-bottom: 20px; 
+    margin-top: 20px;
+}
+
+.profile-section label {
+    font-style: normal;
+}
+
+.profile-section input {
+    width: 100%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-actions {
+    margin-top: 20px; 
+}
+
+.save-button,
+.cancel-button,
+.edit-button {
+    padding: 10px 15px;
+    margin-right: 10px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+.save-button {
+    background-color: #28a745;
+    color: white; 
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+.cancel-button {
+    background-color: #dc3545;
+    color: white; 
+}
+
+.cancel-button:hover {
+    background-color: #c82333; 
+}
+
+.edit-button {
+    background-color: #ffc107; 
+    color: black; 
+}
+
+.edit-button:hover {
+    background-color: #e0a800;
+}
+
+.history-section {
+    margin-top: 30px;
+}
+
+.history-section h3 {
+    border-bottom: 1px solid #ddd; 
+    padding-bottom: 5px; 
+}
+
+.history-section ul {
+    list-style-type: none; 
+    padding: 0; 
+}
+
+.history-section li {
+    margin-bottom: 10px; 
+    background-color: #e9ecef; 
+    padding: 10px;
+    border-radius: 4px;
+}

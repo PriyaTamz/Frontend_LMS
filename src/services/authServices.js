@@ -4,14 +4,55 @@ const authServices = {
     viewAllBooks: async () => {
         return await instance.get('/books');
     },
-    addBook: async (bookData) => {
+    getBookById: async (bookId) => {
+        console.log("Fetching details for book ID:", bookId); 
+        const response = await instance.get(`/books/details/${bookId}`);
+        return response.data;
+    }, 
+    getBookByIdAuthenticated: async (bookId, token) => {
+        if (!bookId) {
+            console.error("Book ID is undefined");
+            return;
+        }
+        console.log("Fetching authenticated details for book ID:", bookId);
+        const response = await instance.get(`/books/auth/details/${bookId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`, 
+            },
+        });
+        return response.data;
+    },    
+    fetchBookDetails: async (bookId) => {
+        const token = localStorage.getItem('token');
+        const response = await instance.get(`/books/${bookId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+    },  
+    /*addBook: async (bookData) => {
         const response = await instance.post('/books', bookData, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
         });
         return response.data;
-    },
+    },*/
+    addBook: async (bookData) => {
+        try {
+            const response = await instance.post('/books', bookData, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error adding book:', error.response || error.message);
+            throw error; 
+        }
+    },    
     updateBook: async (id, bookData) => {
         const response = await instance.patch(`/books/${id}`, bookData, {
             headers: {
@@ -35,12 +76,12 @@ const authServices = {
     },
     userlogin: async (data) => {
         const response = await instance.post('/user/login', data);
-        console.log("user auth :", response.data.token); 
+        console.log("user auth :", response.data.token);
         if (response.data.token) {
             localStorage.setItem('token', response.data.token);
         }
-        if (response.data.userId) { 
-            localStorage.setItem('userId', response.data.userId); 
+        if (response.data.userId) {
+            localStorage.setItem('userId', response.data.userId);
         }
         return response;
     },
@@ -48,13 +89,13 @@ const authServices = {
         return await instance.post('/admin/register', data);
     },
     adminlogin: async (data) => {
-        const response = await instance.post('/admin/login', data); 
-        console.log("admin auth :", response.data.token); 
+        const response = await instance.post('/admin/login', data);
+        console.log("admin auth :", response.data.token);
         if (response.data.token) {
-            localStorage.setItem('token', response.data.token); 
+            localStorage.setItem('token', response.data.token);
         }
-        if (response.data.adminId) { 
-            localStorage.setItem('adminId', response.data.adminId); 
+        if (response.data.adminId) {
+            localStorage.setItem('adminId', response.data.adminId);
         }
         return response;
     },
@@ -77,6 +118,17 @@ const authServices = {
             }
         });
     },
+    updateUserProfile: async (profileData) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found");
+        }
+        return await instance.patch('/user/profile', profileData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    },
     getAdminProfile: async () => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -90,6 +142,8 @@ const authServices = {
     },
     borrowBook: async (bookId) => {
         const token = localStorage.getItem('token');
+        console.log("Token:", token);
+
         if (!token) {
             throw new Error("No token found");
         }
@@ -111,15 +165,14 @@ const authServices = {
         });
     },
     reserveBook: async (bookId) => {
-        const userId = localStorage.getItem('userId'); 
-        const token = localStorage.getItem('token'); 
-        return await instance.post(`/books/reserve/${bookId}`, { userId }, 
+        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
+        return await instance.post(`/books/reserve/${bookId}`, { userId },
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
-            }
-        );
+            });
     },
     returnBook: async (bookId) => {
         const token = localStorage.getItem('token');
@@ -142,10 +195,10 @@ const authServices = {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         });
-    },  
+    },
     getReviews: async (bookId) => {
         return await instance.get(`/books/${bookId}/reviews`);
-    },  
+    },
     deleteReview: async (bookId, reviewId) => {
         return instance.delete(`/admin/delete-review/${bookId}/${reviewId}`, {
             headers: {
@@ -157,7 +210,7 @@ const authServices = {
         return await instance.post('user/forgot-password', data);
     },
     enterOtp: async (otp) => {
-        return await instance.post('user/verify-otp', {otp});
+        return await instance.post('user/verify-otp', { otp });
     },
     resetpassword: async (data) => {
         return await instance.post('user/reset-password', data);
@@ -200,13 +253,43 @@ const authServices = {
         if (!token) {
             throw new Error("No token found");
         }
-        const response = await instance.get(`/notifications`, {
+        return await instance.get(`/notifications`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-        return response.data;
-    },    
+    },
+    markAsRead: async (notificationId) => {
+        const token = localStorage.getItem('token');
+        return await instance.delete(`/notifications/${notificationId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    },
+    confirmBorrowBook: async (bookId) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found");
+        }
+        return await instance.post(`/books/confirm-borrow/${bookId}`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    },
+    sendAnnouncement: async (announcementData) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found");
+        }
+        return await instance.post(`/admin/announcement`, announcementData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    },
+
 };
 
 export default authServices;

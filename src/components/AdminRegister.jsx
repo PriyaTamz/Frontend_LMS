@@ -36,6 +36,7 @@ const AdminRegister = () => {
 
   return (
     <div className="container">
+       <button onClick={() => navigate(-1)} className="buttin-nav">Back</button> {/* Back button */}
       <h1 className='header'>Admin Register</h1>
       <form onSubmit={handleAdminRegister}>
         <div>

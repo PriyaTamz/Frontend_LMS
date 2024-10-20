@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import authServices from '../services/authServices';
+import CategoryNavigation from '../pages/CategoryNavigation';
 import './HomeNav.css';
 
 const HomeNav = () => {
@@ -32,7 +33,7 @@ const HomeNav = () => {
   };
 
   const handleRegister = () => {
-   
+
     if (role === 'user') {
       navigate('/user-register');
     } else if (role === 'admin') {
@@ -41,7 +42,7 @@ const HomeNav = () => {
   };
 
   const handleLogin = () => {
-   
+
     if (role === 'user') {
       navigate('/user-login');
     } else if (role === 'admin') {
@@ -51,13 +52,10 @@ const HomeNav = () => {
 
   return (
     <div className="outer-container">
-      <nav>
-        <div className='combine'>
+      
+        <div className="nav-top">
           <div className='library-name'>
             <Link to="/">Open Library</Link>
-          </div>
-          <div className='mybooks'>
-            <Link to="/my-books">My Books</Link>
           </div>
           <div className='log-reg'>
             <select value={role} onChange={(e) => setRole(e.target.value)}>
@@ -68,8 +66,8 @@ const HomeNav = () => {
             <button onClick={handleRegister}>Register</button>
           </div>
         </div>
-        <div>
-        </div>
+
+      <div className='serach-box'>
         <form onSubmit={handleSearch}>
           <div className='search'>
             <select value={searchField} onChange={(e) => setSearchField(e.target.value)}>
@@ -87,7 +85,8 @@ const HomeNav = () => {
             <button type="submit">Search</button>
           </div>
         </form>
-      </nav>
+      </div>
+      <CategoryNavigation />
       <Outlet />
     </div>
   );

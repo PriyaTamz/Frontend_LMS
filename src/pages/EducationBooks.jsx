@@ -4,50 +4,52 @@ import authServices from '../services/authServices';
 import Rating from './Rating';
 import './Home.css';
 
-const Home = () => {
-    const [books, setBooks] = useState([]);
-    const [filteredBooks, setFilteredBooks] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('All');
-    const [visibleBooks, setVisibleBooks] = useState(3); 
+const EducationBooks = () => {
+    const [educationBooks, setEducationBooks] = useState([]);
+    const [visibleEducationBooks, setVisibleEducationBooks] = useState(3); 
     const booksPerRow = 3.5; 
     const navigate = useNavigate();
 
     useEffect(() => {
         authServices.getAllBooks()
             .then(response => {
-                const updatedBooks = response.data.map(book => {
+                
+                const filteredBooks = response.data.filter(book => book.genre === 'Education');
+
+                const updatedBooks = filteredBooks.map(book => {
                    
                     if (book.reviews && book.reviews.length > 0) {
                         const totalRating = book.reviews.reduce((acc, review) => acc + review.rating, 0);
                         const averageRating = totalRating / book.reviews.length;
-                        return { ...book, rating: averageRating }; 
+                        return { ...book, rating: averageRating };
                     }
                     return { ...book, rating: 0 }; 
                 });
 
-                setBooks(updatedBooks);
-                setFilteredBooks(updatedBooks);
+                setEducationBooks(updatedBooks);
             })
             .catch(error => {
-                console.error("Error fetching books:", error);
+                console.error("Error fetching education books:", error);
             });
     }, []);
 
+   
     const handlePreview = (bookId) => {
         navigate(`/books/details/${bookId}`);
     };
 
+  
     const handleViewMore = () => {
-        setVisibleBooks(prevVisibleBooks => prevVisibleBooks + booksPerRow);
+        setVisibleEducationBooks(prevVisibleBooks => prevVisibleBooks + booksPerRow);
     };
 
     return (
         <div>
             <div className="header">
-                <h2>Welcome to Open Library</h2>
+                <h2>Education Books</h2>
             </div>
             <div className="book-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                {filteredBooks.slice(0, visibleBooks * booksPerRow).map(book => (
+                {educationBooks.slice(0, visibleEducationBooks * booksPerRow).map(book => (
                     <div key={book._id} className="card" style={{ width: '18rem' }}>
                         <img
                             src={book.imageUrl || 'https://via.placeholder.com/150'}
@@ -70,7 +72,8 @@ const Home = () => {
                 ))}
             </div>
 
-            {visibleBooks * booksPerRow < filteredBooks.length && (
+           
+            {visibleEducationBooks * booksPerRow < educationBooks.length && (
                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
                     <button className="btn btn-link" onClick={handleViewMore}>
                         View More
@@ -85,4 +88,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default EducationBooks;

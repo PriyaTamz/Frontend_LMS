@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import './UserDashboardNav.css'; 
-import authServices from '../services/authServices'; 
+import authServices from '../services/authServices';
+import './UserDashboardNav.css';
+
 
 const UserDashboardNav = () => {
     const navigate = useNavigate();
-    const [userName, setUserName] = useState(''); 
+    const [userName, setUserName] = useState('');
     const isLoggedIn = !!localStorage.getItem('token');
 
-  
+
     useEffect(() => {
         if (!isLoggedIn) {
-            navigate('/user-login'); 
+            navigate('/user-login');
         } else {
             authServices.getUserProfile()
                 .then(response => {
@@ -26,28 +27,26 @@ const UserDashboardNav = () => {
     }, [isLoggedIn, navigate]);
 
     const handleLogout = () => {
-        localStorage.removeItem('token'); 
-        navigate('/user-login'); 
+        localStorage.removeItem('token');
+        navigate('/');
     };
 
     return (
-        <nav>
-            <span className="user-name">
-                {userName}
-            </span>
-            <ul className="dashboard-nav">
-                <li>
-                    <NavLink to="/my-books" className={({ isActive }) => (isActive ? 'active' : '')}>
-                        My Books
+        <div className="dashboard-container">
+            <nav>
+                <div className='profile'>
+                    <NavLink to="/my-profile" className={({ isActive }) => (isActive ? 'active' : '')}>
+                        My Profile
                     </NavLink>
-                </li>
-                {isLoggedIn && (
-                    <li>
+                </div>
+
+                <div className='logout'>
+                    {isLoggedIn && (
                         <button onClick={handleLogout} className='buttonnav'>Logout</button>
-                    </li>
-                )}
-            </ul>
-        </nav>
+                    )}
+                </div>
+            </nav>
+        </div>
     );
 };
 
