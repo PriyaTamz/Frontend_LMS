@@ -11,28 +11,33 @@ const EducationBooks = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        authServices.getAllBooks()
-            .then(response => {
-                
-                const filteredBooks = response.data.filter(book => book.genre === 'Education');
-
-                const updatedBooks = filteredBooks.map(book => {
-                   
-                    if (book.reviews && book.reviews.length > 0) {
-                        const totalRating = book.reviews.reduce((acc, review) => acc + review.rating, 0);
-                        const averageRating = totalRating / book.reviews.length;
-                        return { ...book, rating: averageRating };
-                    }
-                    return { ...book, rating: 0 }; 
-                });
-
-                setEducationBooks(updatedBooks);
-            })
-            .catch(error => {
+        const fetchEducationBooks = async () => {
+            try {
+                const books = await authServices.getAllBooks(); // Ensure `getAllBooks` returns the books array
+    
+                if (Array.isArray(books)) { // Ensure the response is an array
+                    const filteredBooks = books.filter(book => book.genre === 'Education'); // Filter education books
+    
+                    const updatedBooks = filteredBooks.map(book => {
+                        if (book.reviews && book.reviews.length > 0) {
+                            const totalRating = book.reviews.reduce((acc, review) => acc + review.rating, 0);
+                            const averageRating = totalRating / book.reviews.length;
+                            return { ...book, rating: averageRating };
+                        }
+                        return { ...book, rating: 0 };
+                    });
+    
+                    setEducationBooks(updatedBooks);
+                } else {
+                    console.warn("Books data is not an array:", books);
+                }
+            } catch (error) {
                 console.error("Error fetching education books:", error);
-            });
-    }, []);
-
+            }
+        };
+    
+        fetchEducationBooks(); // Fetch education books on component mount
+    }, []);    
    
     const handlePreview = (bookId) => {
         navigate(`/books/details/${bookId}`);

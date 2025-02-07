@@ -22,7 +22,7 @@ const Register = () => {
 
     let valid = true;
 
-   
+    // Name validation
     if (!name.trim()) {
       setNameError('Name is required');
       valid = false;
@@ -30,7 +30,7 @@ const Register = () => {
       setNameError('');
     }
 
-   
+    // Email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim()) {
       setEmailError('Email is required');
@@ -42,6 +42,7 @@ const Register = () => {
       setEmailError('');
     }
 
+    // Password validation
     if (!password.trim()) {
       setPasswordError('Password is required');
       valid = false;
@@ -52,34 +53,34 @@ const Register = () => {
       setPasswordError('');
     }
 
-    
     if (!valid) {
-      return; 
+      return; // Exit if validation fails
     }
 
-
-    const role = 'user'; 
+    const role = 'user'; // Default role for users
     authServices.userRegister({ name, email, password, role })
       .then(response => {
         alert(response.data.message);
 
+        // Clear the fields and reset Redux state
         dispatch(setName(''));
         dispatch(setEmail(''));
         dispatch(setPassword(''));
-        dispatch(setRole('')); 
+        dispatch(setRole(''));
 
+        // Redirect to login after registration
         setTimeout(() => {
           navigate('/user-login');
         }, 500);
       })
       .catch(error => {
-        alert(error.response.data.message || 'Registration failed');
+        alert(error.response?.data?.message || 'Registration failed');
       });
   };
 
   return (
     <div className="container">
-       <button onClick={() => navigate(-1)} className="buttin-nav">Back</button> 
+      <button onClick={() => navigate(-1)} className="buttin-nav">Back</button>
       <h1 className='header'>User Register</h1>
       <form onSubmit={handleRegister}>
         <div>
@@ -105,12 +106,12 @@ const Register = () => {
         <div>
           <label htmlFor='password'>Password</label>
           <input
-            type='text'
+            type='password' // Changed to 'password' type to mask input
             id='password'
             value={password}
             onChange={(e) => dispatch(setPassword(e.target.value))}
           />
-          {passwordError && <p style={{ color: 'red',  margin: '0 0 0 80px'  }}>{passwordError}</p>}
+          {passwordError && <p style={{ color: 'red', margin: '0 0 0 80px' }}>{passwordError}</p>}
         </div>
         <button type="submit" className='registerbutton'>Register</button>
       </form>

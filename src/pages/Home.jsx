@@ -13,24 +13,26 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        authServices.getAllBooks()
-            .then(response => {
-                const updatedBooks = response.data.map(book => {
-                   
+        const fetchBooks = async () => {
+            try {
+                const books = await authServices.getAllBooks(); // `getAllBooks` should return the books array
+                const updatedBooks = books.map(book => {
+                    // Compute average rating if reviews exist
                     if (book.reviews && book.reviews.length > 0) {
                         const totalRating = book.reviews.reduce((acc, review) => acc + review.rating, 0);
                         const averageRating = totalRating / book.reviews.length;
-                        return { ...book, rating: averageRating }; 
+                        return { ...book, rating: averageRating };
                     }
-                    return { ...book, rating: 0 }; 
+                    return { ...book, rating: 0 }; // Default rating to 0
                 });
-
                 setBooks(updatedBooks);
                 setFilteredBooks(updatedBooks);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error("Error fetching books:", error);
-            });
+            }
+        };
+    
+        fetchBooks(); // Fetch books on component mount
     }, []);
 
     const handlePreview = (bookId) => {

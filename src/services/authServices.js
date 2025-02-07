@@ -69,8 +69,14 @@ const authServices = {
         return instance.patch(`/books/available/${bookId}`, isAvailable);
     },
     getAllBooks: async () => {
-        return await instance.get('/books');
-    },
+        try {
+            const response = await instance.get('/books');
+            return response.data; // Returns the array of books
+        } catch (error) {
+            console.error("Error fetching books:", error.response || error);
+            throw error;
+        }
+    },    
     userRegister: async (data) => {
         return await instance.post('/user/register', data);
     },
