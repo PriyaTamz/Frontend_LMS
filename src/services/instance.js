@@ -5,7 +5,7 @@ const baseurl = 'https://backend-lms-ftog.onrender.com';
 
 const instance = axios.create({
     baseURL: baseurl,
-    timeout: 30000,
+    //timeout: 60000,
     headers: {
         'Content-Type': 'application/json',
     },
