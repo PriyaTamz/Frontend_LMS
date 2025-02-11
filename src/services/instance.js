@@ -3,7 +3,7 @@ import axios from "axios";
 // Determine base URL dynamically based on the environment
 const baseurl =
     process.env.NODE_ENV === "production"
-        ? "https://backend-lms-ftog.onrender.com" // Production backend
+        ? "https://lms-backend-817b.onrender.com" // Production backend
         : "http://localhost:3001"; // Local backend
 
 const instance = axios.create({
